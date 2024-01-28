@@ -1,6 +1,5 @@
 import os
 import re
-import asyncio
 import requests
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
@@ -18,13 +17,13 @@ async def process_start_command(message: types.Message, state, raw_state):
 
 @dp.message_handler(commands=['message'])
 async def process_message(message: types.Message):
-    res = requests.get(f'http://127.0.0.1:5555/')
+    res = requests.get(f'http://localhost:5555/')
     await message.answer(res.text)
 
 
 @dp.message_handler(commands=['post_info'])
 async def process_post_info(message: types.Message):
-    res = requests.post(f'http://127.0.0.1:5555/post')
+    res = requests.post(f'http://0.0.0.0:5555/post')
     res_data = res.json()
     id = res_data['id']
     timestamp = res_data['timestamp']
